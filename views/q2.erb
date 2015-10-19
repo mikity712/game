@@ -7,20 +7,23 @@
 		<link rel="stylesheet" href="style.css" type="text/css">
 	</head>
 	<body>
+	<form action="/success2" method="post">
 		<div>
 			<div>
-				<p>Q1
-				距離が２m離れていて、高さ２mのところにまとがある。
-				砲台の角度を変えてまとにあてなさい。
+				<input type="hidden" name="q" value="2">
+				<p>Q2
+				高さ２mのところにまとがある。
+				砲台の角度は45度に固定されている。
+				まとから何mはなれたところに砲台をおいたらあたるでしょう。
 				</p>
 				<p>
-				<label for="text">砲台の角度</label>
+				<label for="text">砲台の距離</label>
 				<input name="message" style="width:45px;height:20px" id="text" placeholder="入力" type="number">
 				</p>
-				<a href="next.html">決定</a>
-			<!-- <input type="submit" class="btn btn-info" value="OK"> -->
+			<input type="submit" class="btn btn-info" value="決定">
 			</div>
 		</form>
 		</div>
+	</form>
 	</body>
 </html>
