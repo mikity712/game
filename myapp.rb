@@ -6,32 +6,25 @@ get '/' do
 end
 
 post '/success' do
-	@num = "2"
-	@n = "/"
-	number = "10"
-	Q = "1"
 	answer = params[:message]
 	q = params[:q]
-	if number == answer && Q == q then
-	 erb :success
-	 else
-	 erb :fail
-	 end 
+	if "10" == answer && "1" == q then
+		@num = "2"
+		erb :success
+	elsif  "1" == q && !("10" == answer) then
+		@n = "/"
+		erb :fail
+	elsif "2"  == answer && "2" == q then 
+		@num = "3"
+		erb :success
+	elsif "2" == q && !("2"  == answer) then
+		@n = "2"
+		erb :fail
+	else
+		erb :fail
+	end 
 end
 
 get '/2' do
 	erb :q2
 end
-post '/success2' do
-	@num = "3"
-	@n = "2"
-	number = "2"
-	Q = "2"
-	answer = params[:message]
-	q = params[:q]
-	if number == answer && Q == q then
-	 erb :success
-	 else
-	 erb :fail
-	 end 
-	end
