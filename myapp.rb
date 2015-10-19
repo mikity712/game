@@ -8,22 +8,47 @@ end
 post '/success' do
 	answer = params[:message]
 	q = params[:q]
-	if "10" == answer && "1" == q then
-		@num = "2"
-		erb :success
-	elsif  "1" == q && !("10" == answer) then
-		@n = "/"
-		erb :fail
-	elsif "2"  == answer && "2" == q then 
-		@num = "3"
-		erb :success
-	elsif "2" == q && !("2"  == answer) then
-		@n = "2"
-		erb :fail
-	else
-		erb :fail
+	case q
+		when "1" then
+			if answer == "10" then
+				@num = "2"
+				erb :success
+			else
+				@n = "/"
+				erb :fail
+			end
+		when "2" then
+			if answer == "2" then
+				@num = "3"
+				erb :success
+			else 
+				@n = "2"
+				erb :fail
+			end
 	end 
 end
+
+# post '/success' do
+# 	answer = params[:message]
+# 	q = params[:q]
+# 	if q == "1" then
+# 		if answer == "10" then
+# 			@num = "2"
+# 			erb :success
+# 		else
+# 			@n = "/"
+# 			erb :fail
+# 		end
+# 	elsif q == "2" then 
+# 		if answer == "2" then
+# 			@num = "3"
+# 			erb :success
+# 		else 
+# 			@n = "2"
+# 			erb :fail
+# 		end
+# 	end 
+# end
 
 get '/2' do
 	erb :q2
