@@ -8,9 +8,9 @@
 	</head>
 	<body>
 		<div>
-			<div>
-				失敗！
-				<a href="<%=@n%>">戻る</a>
+			<form action="/<%=@num%>" method="get">
+				<p>失敗！</p>
+				<input type="submit" class="btn btn-info" value="同じ問題に戻る">
 			</div>
 		</form>
 		</div>
