@@ -9,6 +9,13 @@ require 'active_record'
 ActiveRecord::Base.configurations = YAML.load_file('database.yml')
 ActiveRecord::Base.establish_connection(:development)
 
+class Game < ActiveRecord::Base;
+end
+
+
+get '/index' do
+	erb :access
+end
 get '/' do
 	erb :index
 end
@@ -58,6 +65,27 @@ end
 # 	end 
 # end
 
+
+
 get '/2' do
-	erb :q2
+	@game = Game.order(dis_order: :asc)
+erb :q2
+end
+
+get '/question' do
+	@count = Game.count
+	erb :sendques
+end
+
+
+post '/send-ques' do
+	@ques = params[:ques]
+	@ans = params[:ans] 
+	@order = params[:order]
+	game=Game.new
+	game.ques=@ques
+	game.ans=@ans
+	game.dis_order=@order
+	game.save
+	redirect '/index'
 end

@@ -24,6 +24,12 @@
 				</p>
 			<input type="submit" class="btn btn-info" value="決定">
 			</div>
+			<!--<p><%#=@game.ques%></p> -->
+			<p>
+				<%@game.each do |y|%>
+				<%=y.ques%> 
+				<%end%>
+			</p>
 		</form>
 		</div>
 	</form>
