@@ -18,6 +18,7 @@ get '/' do
 end
 
 get '/book' do
+	@count = Game.count
 	erb :index
 end
 
@@ -25,41 +26,25 @@ post '/success' do
 	answer = params[:answer]
 	q = params[:q]
 	@games = Game.order(dis_order: :asc)
-	p params[:ans]
-	case q
-	when "1" then
-		@game = @games[0]
-		if answer == @game.ans then
-			@num = "2"
-			erb :success
-		else
-			@n = "1"
-			erb :fail
-		end
-	# when "2" then
-	# 	@game = @games[1]
-	# 	if answer == @game.ans then
-	# 		@num = "3"
-	# 		erb :success
-	# 	else 
-	# 		@n = "2"
-	# 		erb :fail
-	# 	end
-	end 
+	number = q.to_i
+	@game = @games[number-1]
+	if @games[number].nil?
+		erb :finish
+	elsif answer == @game.ans then
+		@num = number+1
+		erb :success
+	else
+		@n = number
+		erb :fail
+	end
 end
 
 
-get '/1' do
+get '/game/:number' do
+	q = params[:number]
 	@games = Game.order(dis_order: :asc)
-	@game = @games[0]
-	@number = "1"
-	erb :question
-end
-
-get '/2' do
-	@games = Game.order(dis_order: :asc)
-	@game = @games[1]
-	@number = "2"
+	@game = @games[q.to_i-1]
+	@number = q.to_i
 	erb :question
 end
 
@@ -70,6 +55,7 @@ end
 
 
 post '/send-ques' do
+	p params
 	@ques = params[:ques]
 	@ans = params[:ans] 
 	@order = params[:order]
@@ -78,5 +64,5 @@ post '/send-ques' do
 	game.ans=@ans
 	game.dis_order=@order
 	game.save
-	redirect '/access'
+	redirect '/'
 end

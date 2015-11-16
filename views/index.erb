@@ -7,20 +7,18 @@
 		<link rel="stylesheet" href="style.css" type="text/css">
 	</head>
 	<body>
-	<form>
 		<div>
-			<input type="hidden" name="q" value="1">
 			<p>
-				<a href="/1">Q1</a>
-			</p>
-			<p>
-				<a href="/2">Q2</a>
-			</p>
-			<p>
+				<% x = 1..@count %>
+				<% x.each do |y| %>
+					<div>
+						☆<a href="/game/<%= y %>">第<%= y %>問目</a>
+					</div>
+				<% end %>
+			<p> <br><br></p>
 				<a href="/">戻る</a>
 			</p>
 		</div>
-	</form>
 	</body>
 </html>
 
