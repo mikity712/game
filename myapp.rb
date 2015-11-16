@@ -13,63 +13,54 @@ class Game < ActiveRecord::Base;
 end
 
 
-get '/index' do
+get '/' do
 	erb :access
 end
-get '/' do
+
+get '/book' do
 	erb :index
 end
 
 post '/success' do
-	answer = params[:message]
+	answer = params[:answer]
 	q = params[:q]
+	@games = Game.order(dis_order: :asc)
+	p params[:ans]
 	case q
 	when "1" then
-		if answer == "45" then
+		@game = @games[0]
+		if answer == @game.ans then
 			@num = "2"
 			erb :success
 		else
-			@n = "/"
+			@n = "1"
 			erb :fail
 		end
-	when "2" then
-		if answer == "2" then
-			@num = "3"
-			erb :success
-		else 
-			@n = "2"
-			erb :fail
-		end
+	# when "2" then
+	# 	@game = @games[1]
+	# 	if answer == @game.ans then
+	# 		@num = "3"
+	# 		erb :success
+	# 	else 
+	# 		@n = "2"
+	# 		erb :fail
+	# 	end
 	end 
 end
 
-# post '/success' do
-# 	answer = params[:message]
-# 	q = params[:q]
-# 	if q == "1" then
-# 		if answer == "10" then
-# 			@num = "2"
-# 			erb :success
-# 		else
-# 			@n = "/"
-# 			erb :fail
-# 		end
-# 	elsif q == "2" then 
-# 		if answer == "2" then
-# 			@num = "3"
-# 			erb :success
-# 		else 
-# 			@n = "2"
-# 			erb :fail
-# 		end
-# 	end 
-# end
 
-
+get '/1' do
+	@games = Game.order(dis_order: :asc)
+	@game = @games[0]
+	@number = "1"
+	erb :question
+end
 
 get '/2' do
-	@game = Game.order(dis_order: :asc)
-erb :q2
+	@games = Game.order(dis_order: :asc)
+	@game = @games[1]
+	@number = "2"
+	erb :question
 end
 
 get '/question' do
@@ -87,5 +78,5 @@ post '/send-ques' do
 	game.ans=@ans
 	game.dis_order=@order
 	game.save
-	redirect '/index'
+	redirect '/access'
 end
