@@ -8,9 +8,10 @@
 	</head>
 	<body>
 		<div>
-			<form action="/game/<%=@n%>" method="get">
-				<p>失敗！</p>
-				<input type="submit" class="btn btn-info" value="同じ問題に戻る">
+			<p>失敗！</p>
+			<input type ="button" onclick="location.href='/game/<%=@n%>'"value="同じ問題に戻る">
+			<!-- <form action="/game/<%=@n%>" method="get"> -->
+			<!-- 	<input type="submit" class="btn btn-info" value="同じ問題に戻る"> -->
 			</form>
 		</div>
 	</body>
